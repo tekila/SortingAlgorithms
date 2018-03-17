@@ -5,13 +5,9 @@
  */
 //package sorting1;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -24,7 +20,7 @@ class Aluno
     int problemasresolvidos;
     String nome;
 
-    public Aluno(int problemasresolvidos, String nome) {
+    public Aluno(String nome, int problemasresolvidos) {
         this.problemasresolvidos = problemasresolvidos;
         this.nome = nome;
     }
@@ -52,7 +48,6 @@ class Aluno
    
 }
 //</editor-fold>
-
 //<editor-fold defaultstate="collapsed" desc="InsertionSort">
 
 class InsertionSort
@@ -324,12 +319,11 @@ public class Sorting1 {
         n = Integer.parseInt(sc.nextLine());
         Aluno [] alunos = new Aluno[n];
         for (int i = 0; i < alunos.length; i++) {
-            String linha = sc.nextLine();
-            String[] partes = linha.split(" ");
-            alunos[i] = new Aluno(Integer.parseInt(partes[1]), partes[0]);
+         
+            alunos[i] = new Aluno(sc.next(), sc.nextInt());
         }
         
-        BubbleSort is = new BubbleSort(alunos);
+        InsertionSort is = new InsertionSort(alunos);
         is.sortOptimized();
         is.getArray()[0].printAluno();
     }

@@ -86,7 +86,7 @@ public class Gerador {
         RandomString rs = new RandomString(20);
         int random;
         for (int i = 0; i < 10000; i++) {
-            random = rd.nextInt(11);
+            random = rd.nextInt(101);
             String nome = rs.nextString();
             bw.write(nome + " " + random);
             bw.newLine();
