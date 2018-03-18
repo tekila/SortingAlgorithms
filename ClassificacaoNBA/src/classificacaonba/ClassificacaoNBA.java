@@ -74,7 +74,8 @@ class Time{
     }
 
     public void setCestaAverage() {
-        this.cestaAverage = this.cestasMarcadas/this.cestasRecebidas;
+        if(this.cestasRecebidas == 0) this.cestaAverage = this.cestasMarcadas;
+        else this.cestaAverage = this.cestasMarcadas/this.cestasRecebidas;
     }
 
     public int getPontos() {
@@ -95,11 +96,23 @@ class Time{
             t.setCestaAverage();
             if(this.cestaAverage > t.getCestaAverage())
             {
-                if(this.inscricao<t.getInscricao()) return true;
-                else return false;
-            }else
+                return true;
+            }else 
             {
-                return !(this.cestaAverage > t.getCestaAverage());
+                if(this.cestaAverage==t.getCestaAverage())
+                {
+                    if(this.cestasMarcadas > t.cestasMarcadas) return true;
+                    else {
+                        if(this.cestasMarcadas == t.cestasMarcadas)
+                        {
+                            if(this.inscricao<t.getInscricao()) return true;
+                            else return false;
+                        }
+                        else return false;
+                    }
+                    
+                }
+                else return false;
             }
         }
         else return false;
@@ -112,7 +125,7 @@ class Time{
     
 }
 //</editor-fold>
-
+//<editor-fold defaultstate="collapsed" desc="class:Time">
 class MergeSort{
     
     Time[] times;
@@ -173,6 +186,8 @@ class MergeSort{
     }
 }
 
+//</editor-fold>
+
 public class ClassificacaoNBA {
 
     
@@ -221,7 +236,7 @@ public class ClassificacaoNBA {
             Time a = ms.getTimes()[i];
             a.printTime();
         }
-        System.out.println();        
+               
 
     }
     
