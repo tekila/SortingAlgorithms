@@ -283,7 +283,7 @@ public class Sorting1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        
         
         //esse codigo aqui foi usado para validar o funcionamento dos sorts.
         //em um projeto separado eu criei um gerador de string aleatorias para 
@@ -314,6 +314,7 @@ public class Sorting1 {
 //            Logger.getLogger(Sorting1.class.getName()).log(Level.SEVERE, null, ex);
 //        }
         
+        Scanner sc = new Scanner(System.in);
         
         int n;
         n = Integer.parseInt(sc.nextLine());

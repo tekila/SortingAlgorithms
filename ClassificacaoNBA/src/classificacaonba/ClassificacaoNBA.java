@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-//package classificacaonba;
+package classificacaonba;
 
 import java.util.Scanner;
 
@@ -44,7 +44,7 @@ class Time{
         this.cestasMarcadas += cestas;
     }
     public void addCestasRecebidas(int cestas){
-        this.cestasMarcadas += cestas;
+        this.cestasRecebidas += cestas;
     }
     
     public void addPontos(int pontos)
@@ -84,43 +84,38 @@ class Time{
 
     public boolean ehIgualA(Time t)
     {
-        return this.pontos == t.getPontos();
+        if(this.pontos == t.pontos) return true;
+        else return false;
     }
     
-    public boolean ehMaiorQue(Time t)
+    public boolean ehMelhorColocadoDoQue(Time t)
     {
-        if(this.pontos>t.getPontos()) return true;
-        else if(this.ehIgualA(t))
+        if(this.pontos > t.getPontos()) return true;
+        else if(this.pontos == t.pontos)
         {
             this.setCestaAverage();
             t.setCestaAverage();
-            if(this.cestaAverage > t.getCestaAverage())
+            if(this.cestaAverage > t.getCestaAverage()) return true;
+            else if(this.cestaAverage == t.getCestaAverage())
             {
-                return true;
-            }else 
-            {
-                if(this.cestaAverage==t.getCestaAverage())
+                if(this.cestasMarcadas > t.cestasMarcadas) return true;
+                else if(this.cestasMarcadas == t.cestasMarcadas)
                 {
-                    if(this.cestasMarcadas > t.cestasMarcadas) return true;
-                    else {
-                        if(this.cestasMarcadas == t.cestasMarcadas)
-                        {
-                            if(this.inscricao<t.getInscricao()) return true;
-                            else return false;
-                        }
-                        else return false;
-                    }
-                    
+                    if(this.inscricao < t.getInscricao()) return true;
+                    else return false;
                 }
                 else return false;
+
             }
+            else return false;
+            
         }
         else return false;
     }
     
     public void printTime()
     {
-        System.out.print(this.inscricao);
+        System.out.print(this.inscricao+ " ");
     }
     
 }
@@ -142,6 +137,10 @@ class MergeSort{
     
     void merge(int p, int q, int r) //metodo intercala
     {
+        
+        
+        
+        
         Time[] aux =  new Time[times.length];
         //monta lista auxiliar
         for(int i = p; i<=r; i++) aux[i] = times[i];
@@ -151,7 +150,7 @@ class MergeSort{
         
         while(i<=q && j<=r)
         {
-            if(aux[i].ehMaiorQue(aux[j]))
+            if(aux[i].ehMelhorColocadoDoQue(aux[j]))
             {
                 times[k] = aux[i];
                 i++;
@@ -172,6 +171,7 @@ class MergeSort{
             times[k] = aux[j];
             j++;k++;
         }
+        
     }
     
     void sort(int p, int r) //metodo ordena
@@ -184,6 +184,7 @@ class MergeSort{
             this.merge(p, q, r);
         }
     }
+        
 }
 
 //</editor-fold>
@@ -220,9 +221,12 @@ public class ClassificacaoNBA {
             {
                 times[x-1].addPontos(2);//ganhou
                 times[z-1].addPontos(1);
-            } else {
+            } else if(y<w){
                 times[x-1].addPontos(1);//perdeu
                 times[z-1].addPontos(2);
+            } else
+            {
+                System.exit(-1);
             }
         }
         
@@ -230,9 +234,9 @@ public class ClassificacaoNBA {
         MergeSort ms = new MergeSort(times);
         ms.sort(0, times.length-1);
         int i;
-        for(i = 0; i<ms.getTimes().length; i++)
+        for(i = (ms.getTimes().length)-1; i>=0; i--)
         {
-            if(i!= 0) System.out.print(" ");
+            //if(i!= 0) System.out.print(" ");
             Time a = ms.getTimes()[i];
             a.printTime();
         }
